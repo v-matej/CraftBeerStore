@@ -6,12 +6,14 @@ const beerRoutes = require('./routes/beerRoutes');
 const userRoutes = require('./routes/userRoutes');
 const cartRoutes = require('./routes/cartRoutes');
 const favoriteRoutes = require('./routes/favoriteRoutes');
+const cors = require('cors');
 
 require('dotenv').config();
 
 const app = express();
 const PORT = 5000;
 
+app.use(cors());
 app.use(bodyParser.json());
 
 mongoose.connect('mongodb://root:root@localhost:27017/craft_beer?authSource=admin');
