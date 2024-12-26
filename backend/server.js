@@ -11,10 +11,11 @@ const cors = require('cors');
 require('dotenv').config();
 
 const app = express();
-const PORT = 5000;
+
+app.use(bodyParser.json());
 
 app.use(cors());
-app.use(bodyParser.json());
+app.options('*', cors());
 
 mongoose.connect('mongodb://root:root@localhost:27017/craft_beer?authSource=admin');
 

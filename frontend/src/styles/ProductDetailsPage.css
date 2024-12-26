@@ -1,0 +1,21 @@
+.product-details {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    font-family: Arial, sans-serif;
+  }
+  
+  .product-details h1 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+  }
+  
+  .product-details p {
+    margin: 5px 0;
+    font-size: 1.1rem;
+  }
+  
+  .product-details strong {
+    color: #333;
+  }
+  

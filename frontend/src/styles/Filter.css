@@ -1,0 +1,95 @@
+/* Styling the Filter Component */
+.filter {
+    background-color: #f5f5f5;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    position: sticky;
+    top: 20px; /* Keep filter fixed while scrolling */
+  }
+  
+  .filter h3 {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    color: #333;
+  }
+  
+  .filter div {
+    margin-bottom: 15px;
+  }
+  
+  .filter label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+  }
+  
+  .filter select,
+  .filter input[type="range"] {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+  }
+  
+  .filter input[type="checkbox"] {
+    margin-top: 10px;
+  }
+  
+  .filter .range-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .filter .range-container label {
+    flex: 1;
+  }
+  
+  .filter .range-container input[type="range"] {
+    flex: 3;
+  }
+  
+  .filter select,
+  .filter input[type="range"] {
+    font-size: 1rem;
+  }
+  
+  /* Style for Range Input */
+  .filter input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 8px;
+    background: #ddd;
+    border-radius: 5px;
+    outline: none;
+  }
+  
+  .filter input[type="range"]:focus {
+    background: #aaa;
+  }
+  
+  .filter input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background: #4CAF50;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  
+  .filter input[type="range"]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background: #4CAF50;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+  
