@@ -25,13 +25,15 @@ const FavoritesPage = () => {
 
   return (
     <div className="favorites-page">
+      <h2>Favorites</h2>
       <main className="content">
-        <h2>Favorites</h2>
+        <div className="messages">
         {favoritesLoading && <p>Loading favorites...</p>}
         {favoritesError && <p className="error">{favoritesError}</p>}
         {!favoritesLoading && !favoritesError && favorites.length === 0 && (
-          <p>You have no favorites yet.</p>
+          <p className="no-favorite">You have no favorites yet.</p>
         )}
+        </div>
         <div className="product-list">
           {!favoritesLoading &&
             !favoritesError &&
