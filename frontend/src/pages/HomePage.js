@@ -2,14 +2,15 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import BeerService from "../services/BeerService";
 import BreweryService from "../services/BreweryService";
-import FavoriteService from "../services/FavoriteService"; // Import FavoriteService
+import FavoriteService from "../services/FavoriteService";
+import CartService from "../services/CartService"; // Import CartService
 import Filter from "../components/Filter";
 import "../styles/HomePage.css";
 
 const HomePage = () => {
   const [beers, setBeers] = useState([]);
   const [breweries, setBreweries] = useState([]);
-  const [favorites, setFavorites] = useState([]); // To store favorite beers
+  const [favorites, setFavorites] = useState([]);
   const [selectedBrewery, setSelectedBrewery] = useState("");
   const [selectedType, setSelectedType] = useState("");
   const [alcoholPercentage, setAlcoholPercentage] = useState({
@@ -21,6 +22,8 @@ const HomePage = () => {
     min: 4,
     max: 7,
   });
+  const [isModalOpen, setIsModalOpen] = useState(false); // Modal state
+  const [modalMessage, setModalMessage] = useState(""); // Modal message
   const [beersLoading, setBeersLoading] = useState(true);
   const [breweriesLoading, setBreweriesLoading] = useState(true);
   const [beersError, setBeersError] = useState(null);
@@ -81,7 +84,7 @@ const HomePage = () => {
     const fetchFavorites = async () => {
       try {
         const favoriteList = await FavoriteService.getFavorites();
-        setFavorites(favoriteList.map((fav) => fav.product._id)); // Store only beer IDs
+        setFavorites(favoriteList.map((fav) => fav.product._id));
       } catch (err) {
         console.error(err);
       }
@@ -89,6 +92,19 @@ const HomePage = () => {
 
     fetchFavorites();
   }, []);
+
+  // Add beer to cart
+  const handleAddToCart = async (beerId) => {
+    try {
+      await CartService.addToCart(beerId, 1);
+      setModalMessage("Added to cart successfully!");
+      setIsModalOpen(true);
+    } catch (err) {
+      console.error("Error adding to cart", err);
+      setModalMessage("Failed to add to cart.");
+      setIsModalOpen(true);
+    }
+  };
 
   // Add beer to favorites
   const handleAddToFavorites = async (beerId) => {
@@ -112,7 +128,6 @@ const HomePage = () => {
     }
   };
 
-  // Filter beers based on selected filters
   const filteredBeers = React.useMemo(() => {
     return beers.filter((beer) => {
       const isWithinAlcoholRange =
@@ -153,24 +168,35 @@ const HomePage = () => {
               !beersError &&
               filteredBeers.map((beer) => (
                 <div key={beer._id} className="product-card">
-                  {/* Link on beer name instead of a separate link */}
                   <h3>
                     <Link to={`/products/${beer._id}`}>{beer.name}</Link>
                   </h3>
                   <p>Type: {beer.type}</p>
                   <p>Alcohol: {beer.alcoholPercentage}%</p>
                   <p>Price: ${beer.price.toFixed(2)}</p>
-                  {/* Check if the beer is in the favorites list */}
                   {favorites.includes(beer._id) ? (
                     <button onClick={() => handleRemoveFromFavorites(beer._id)}>Remove from Favorites</button>
                   ) : (
                     <button onClick={() => handleAddToFavorites(beer._id)}>Add to Favorites</button>
                   )}
+                  <br />
+                  <button onClick={() => handleAddToCart(beer._id)}>Add to Cart</button>
                 </div>
               ))}
           </div>
         </section>
       </main>
+      {isModalOpen && (
+        <div className="modal">
+          <div className="modal-content">
+            <p>{modalMessage}</p>
+            <button onClick={() => setIsModalOpen(false)}>Continue Shopping</button>
+            <Link to="/cart">
+              <button>View Cart</button>
+            </Link>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

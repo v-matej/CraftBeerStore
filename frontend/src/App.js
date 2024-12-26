@@ -10,12 +10,12 @@ import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import ProductDetailsPage from './pages/ProductDetailsPage';
 import FavoritesPage from './pages/FavoritesPage';
+import CartPage from './pages/CartPage';
 
 
 // import ManufacturerListPage from './pages/ManufacturerListPage';
 // import ManufacturerDetailsPage from './pages/ManufacturerDetailsPage';
 
-// import ShoppingCartPage from './pages/ShoppingCartPage';
 
 function App() {
   return (
@@ -33,14 +33,18 @@ function App() {
               element={
                 <ProtectedRoute>
                   <FavoritesPage />
-                </ProtectedRoute>
-              }
-            />
+                </ProtectedRoute>}/>
+            <Route 
+              path="/cart" 
+              element={
+                <ProtectedRoute>
+                  <CartPage />
+                </ProtectedRoute>} />
+
             
             {/* 
             <Route path="/manufacturers" element={<ManufacturerListPage />} />
             <Route path="/manufacturers/:manufacturerId" element={<ManufacturerDetailsPage />} />
-            <Route path="/cart" element={<ShoppingCartPage />} />
              /> */}
           </Routes>
         </div>
