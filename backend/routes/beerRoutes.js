@@ -52,6 +52,8 @@ router.put('/:id', auth.admin(),
     id: Joi.string().trim().required(),
   }),
   validate.body({
+    _id: Joi.string().trim(),
+    __v: Joi.number().integer(),
     name: Joi.string().trim(),
     price: Joi.number().raw(),
     alcoholPercentage: Joi.number().raw(),

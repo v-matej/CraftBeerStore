@@ -1,0 +1,210 @@
+/* Beer Details Page Container */
+.beer-details-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  background-color: #f9fbfc;
+  min-height: 100vh;
+  max-width: 600px;
+  margin: 0 auto;
+  border-radius: 8px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  font-family: 'Arial', sans-serif;
+}
+
+
+/* Beer Header */
+.beer-header {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 10px;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* Beer Info */
+.beer-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;  /* Reduced gap */
+  margin-bottom: 20px;  /* Reduced margin */
+  padding: 10px 15px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.beer-info-item {
+  font-size: 1.2rem;
+  color: #555;
+  margin-bottom: 5px; /* Reduced margin to match Brewery */
+}
+
+.beer-info-item span {
+  font-weight: bold;
+  color: #007bff;
+}
+
+/* Beer Description */
+.beer-description {
+  font-size: 1rem;
+  color: #666;
+  line-height: 1.5;
+  margin-top: 10px; /* Reduced margin */
+}
+
+/* Beer Actions */
+.beer-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px; /* Reduced gap to match Brewery */
+  margin-top: 15px; /* Reduced margin to match Brewery */
+}
+
+/* Beer Action Button */
+.beer-action-button {
+  flex: 1;
+  padding: 12px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  transition: transform 0.2s, background-color 0.3s;
+}
+
+.beer-action-button.edit {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.beer-action-button.edit:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+.beer-action-button.delete {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+.beer-action-button.delete:hover {
+  background-color: #a71d2a;
+  transform: scale(1.05);
+}
+
+/* Beer Loading Text */
+.beer-loading {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #888;
+  margin-top: 20px;
+}
+
+/* Modal Overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+/* Modal Container */
+.modal {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  width: 400px;
+  max-width: 90%;
+  text-align: center;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Modal Fade-in Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Modal Actions */
+.modal-actions {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+/* Modal Buttons */
+.modal-button {
+  padding: 10px 15px;
+  font-size: 0.9rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: transform 0.2s, background-color 0.3s;
+}
+
+.modal-button.confirm {
+  background-color: #dc3545;
+  color: white;
+}
+
+.modal-button.confirm:hover {
+  background-color: #a71d2a;
+  transform: scale(1.05);
+}
+
+.modal-button.cancel {
+  background-color: #6c757d;
+  color: white;
+}
+
+.modal-button.cancel:hover {
+  background-color: #495057;
+  transform: scale(1.05);
+}
+
+/* Responsiveness for smaller screens */
+@media (max-width: 768px) {
+  .beer-details-page {
+    padding: 20px;
+  }
+
+  .beer-header {
+    font-size: 1.8rem;
+  }
+
+  .beer-info-item {
+    font-size: 1rem;
+  }
+
+  .beer-description {
+    font-size: 1rem;
+  }
+
+  .beer-actions {
+    flex-direction: column;
+  }
+
+  .beer-action-button {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}

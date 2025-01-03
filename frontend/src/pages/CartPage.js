@@ -24,7 +24,7 @@ const CartPage = () => {
   }, []);
 
   const handleQuantityChange = async (productId, newQuantity) => {
-    if (newQuantity < 1) return; // Prevent reducing below 1
+    if (newQuantity < 1) return;
     try {
       const updatedItem = await CartService.updateCartItem(productId, newQuantity );
       setCartItems((prev) =>
@@ -93,7 +93,7 @@ const CartPage = () => {
           </div>
           <div className="cart-summary">
             <h3>Total Sum: ${totalSum.toFixed(2)}</h3>
-            <button className="checkout-btn">Checkout</button>
+            <button className="checkout-btn" onClick={handleClearCart}>Checkout</button>
           </div>
         </>
       )}

@@ -75,6 +75,38 @@
   color: #666;
 }
 
+/* Buttons Styling for Product Card */
+.buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.buttons button {
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  border: none;
+}
+
+.buttons .add-to-favorites {
+  background-color: #ff6600;
+  color: white;
+}
+
+.buttons .add-to-favorites:hover {
+  background-color: #e65c00;
+}
+
+.buttons .add-to-cart {
+  background-color: #007bff;
+  color: white;
+}
+
+.buttons .add-to-cart:hover {
+  background-color: #0056b3;
+}
+
 .error {
   color: red;
   font-weight: bold;
@@ -103,7 +135,7 @@
 }
 
 .modal-content button {
-  margin: 10px 5px; /* Adds spacing between buttons */
+  margin: 10px 5px;
 }
 
 .modal-content .view-cart-button {

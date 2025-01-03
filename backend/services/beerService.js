@@ -1,5 +1,7 @@
 const Beer = require('../models/beer');
 const Brewery = require('../models/brewery');
+const CartItem = require('../models/cartItem');
+const FavoriteItem = require('../models/favoriteItem');
 
 const getBeers = async () => {
   return await Beer.find().populate('brewery', 'name country');
@@ -44,6 +46,9 @@ const updateBeer = async (id, data) => {
 };
 
 const deleteBeer = async (id) => {
+  await CartItem.deleteMany({ product: id });
+  await FavoriteItem.deleteMany({ product: id });
+
   const deletedBeer = await Beer.findByIdAndDelete(id);
   if (!deletedBeer) {
     throw new Error('Beer not found');

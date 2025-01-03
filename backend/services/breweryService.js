@@ -1,4 +1,5 @@
 const Brewery = require('../models/brewery');
+const Beer = require('../models/beer');
 
 const getBreweries = async () => {
   return await Brewery.find();
@@ -31,6 +32,11 @@ const updateBrewery = async (id, data) => {
 };
 
 const deleteBrewery = async (id) => {
+  const beersWithBrewery = await Beer.findOne({ brewery: id });
+  if (beersWithBrewery) {
+    throw new Error('Cannot delete brewery with associated beers');
+  }
+
   const deletedBrewery = await Brewery.findByIdAndDelete(id);
   if (!deletedBrewery) {
     throw new Error('Brewery not found');

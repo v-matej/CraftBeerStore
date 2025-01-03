@@ -8,6 +8,7 @@ const FavoritesPage = () => {
   const [favoritesLoading, setFavoritesLoading] = useState(true);
   const [favoritesError, setFavoritesError] = useState(null);
 
+  // Fetch favorites on component mount
   useEffect(() => {
     const fetchFavorites = async () => {
       try {
@@ -23,16 +24,28 @@ const FavoritesPage = () => {
     fetchFavorites();
   }, []);
 
+  // Handle removing a product from favorites
+  const handleRemoveFromFavorites = async (productId) => {
+    try {
+      await FavoriteService.removeFavorite(productId); // Call the service to remove from favorites
+      setFavorites((prevFavorites) =>
+        prevFavorites.filter((fav) => fav.product._id !== productId)
+      );
+    } catch (err) {
+      console.error("Error removing from favorites", err);
+    }
+  };
+
   return (
     <div className="favorites-page">
       <h2>Favorites</h2>
       <main className="content">
         <div className="messages">
-        {favoritesLoading && <p>Loading favorites...</p>}
-        {favoritesError && <p className="error">{favoritesError}</p>}
-        {!favoritesLoading && !favoritesError && favorites.length === 0 && (
-          <p className="no-favorite">You have no favorites yet.</p>
-        )}
+          {favoritesLoading && <p>Loading favorites...</p>}
+          {favoritesError && <p className="error">{favoritesError}</p>}
+          {!favoritesLoading && !favoritesError && favorites.length === 0 && (
+            <p className="no-favorite">You have no favorites yet.</p>
+          )}
         </div>
         <div className="product-list">
           {!favoritesLoading &&
@@ -40,13 +53,16 @@ const FavoritesPage = () => {
             favorites.length > 0 &&
             favorites.map((fav) => (
               <div key={fav.product._id} className="product-card">
-                {/* Link on beer name instead of a separate link */}
                 <h3>
                   <Link to={`/products/${fav.product._id}`}>{fav.product.name}</Link>
                 </h3>
                 <p>Type: {fav.product.type}</p>
                 <p>Alcohol: {fav.product.alcoholPercentage}%</p>
                 <p>Price: ${fav.product.price.toFixed(2)}</p>
+                {/* Button to remove from favorites */}
+                <button onClick={() => handleRemoveFromFavorites(fav.product._id)}>
+                  Remove from Favorites
+                </button>
               </div>
             ))}
         </div>

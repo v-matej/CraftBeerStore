@@ -66,6 +66,55 @@ router.get('/', auth.admin(), async (req, res) => {
   }
 });
 
+router.get('/:id', auth.admin(), async (req, res) => {
+  try {
+    const user = await UserService.getUserById(req.params.id);
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+    res.json(user);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+router.post(
+  '/',
+  auth.admin(),
+  validate.body({
+    email: Joi.string().email().required(),
+    password: Joi.string().trim().required(),
+    role: Joi.string().valid('user', 'admin').required(),
+  }),
+  async (req, res) => {
+    try {
+      const user = await UserService.createUser(req.body);
+      res.status(201).json(user);
+    } catch (err) {
+      res.status(400).json({ error: err.message });
+    }
+  }
+);
+
+router.put('/:id', auth.admin(), async (req, res) => {
+  try {
+    const { id } = req.params;
+    const updates = req.body;
+
+    const updatedUser = await UserService.updateUser(id, updates);
+
+    if (!updatedUser) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    res.json(updatedUser);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+});
+
+
+
 router.delete('/:id', auth.admin(), async (req, res) => {
   try {
     await UserService.deleteUser(req.params.id);

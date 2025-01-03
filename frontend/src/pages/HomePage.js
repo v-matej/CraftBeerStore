@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import BeerService from "../services/BeerService";
 import BreweryService from "../services/BreweryService";
 import FavoriteService from "../services/FavoriteService";
-import CartService from "../services/CartService"; // Import CartService
+import CartService from "../services/CartService";
 import Filter from "../components/Filter";
 import "../styles/HomePage.css";
 
@@ -22,8 +22,8 @@ const HomePage = () => {
     min: 4,
     max: 7,
   });
-  const [isModalOpen, setIsModalOpen] = useState(false); // Modal state
-  const [modalMessage, setModalMessage] = useState(""); // Modal message
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
   const [beersLoading, setBeersLoading] = useState(true);
   const [breweriesLoading, setBreweriesLoading] = useState(true);
   const [beersError, setBeersError] = useState(null);
@@ -44,7 +44,6 @@ const HomePage = () => {
     });
   };
 
-  // Fetch beers and update state
   useEffect(() => {
     const fetchBeers = async () => {
       try {
@@ -63,7 +62,6 @@ const HomePage = () => {
     fetchBeers();
   }, []);
 
-  // Fetch breweries and update state
   useEffect(() => {
     const fetchBreweries = async () => {
       try {
@@ -79,7 +77,6 @@ const HomePage = () => {
     fetchBreweries();
   }, []);
 
-  // Fetch user's favorite beers
   useEffect(() => {
     const fetchFavorites = async () => {
       try {
@@ -93,7 +90,6 @@ const HomePage = () => {
     fetchFavorites();
   }, []);
 
-  // Add beer to cart
   const handleAddToCart = async (beerId) => {
     try {
       await CartService.addToCart(beerId, 1);
@@ -106,7 +102,6 @@ const HomePage = () => {
     }
   };
 
-  // Add beer to favorites
   const handleAddToFavorites = async (beerId) => {
     try {
       await FavoriteService.addFavorite(beerId);
@@ -116,7 +111,6 @@ const HomePage = () => {
     }
   };
 
-  // Remove beer from favorites
   const handleRemoveFromFavorites = async (beerId) => {
     try {
       await FavoriteService.removeFavorite(beerId);
@@ -175,12 +169,12 @@ const HomePage = () => {
                   <p>Alcohol: {beer.alcoholPercentage}%</p>
                   <p>Price: ${beer.price.toFixed(2)}</p>
                   {favorites.includes(beer._id) ? (
-                    <button onClick={() => handleRemoveFromFavorites(beer._id)}>Remove from Favorites</button>
+                    <button className="add-to-favorites" onClick={() => handleRemoveFromFavorites(beer._id)}>Remove from Favorites</button>
                   ) : (
-                    <button onClick={() => handleAddToFavorites(beer._id)}>Add to Favorites</button>
+                    <button className="add-to-favorites" onClick={() => handleAddToFavorites(beer._id)}>Add to Favorites</button>
                   )}
                   <br />
-                  <button onClick={() => handleAddToCart(beer._id)}>Add to Cart</button>
+                  <button className="add-to-cart" onClick={() => handleAddToCart(beer._id)}>Add to Cart</button>
                 </div>
               ))}
           </div>

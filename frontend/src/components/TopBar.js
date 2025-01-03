@@ -1,11 +1,24 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
 import "../styles/TopBar.css";
 import { AuthContext } from "../context/AuthContext";
-import logo from "../styles/images/logo.png";
+import logo from "../styles/images/image.png";
 
 const TopBar = () => {
   const { isAuthenticated, logout } = useContext(AuthContext);
+
+  const token = localStorage.getItem("token");
+  let isAdmin = false;
+
+  if (token) {
+    try {
+      const decoded = jwtDecode(token);
+      isAdmin = decoded.user?.role === "admin";
+    } catch (error) {
+      console.error("Invalid token:", error);
+    }
+  }
 
   return (
     <header className="top-bar">
@@ -17,6 +30,7 @@ const TopBar = () => {
           <Link to="/">Home</Link>
           <Link to="/favorites">Favorites</Link>
           <Link to="/cart">Cart</Link>
+          {isAdmin && <Link to="/admin">Control Panel</Link>}
         </nav>
         <div className="auth-bar">
           {isAuthenticated ? (
