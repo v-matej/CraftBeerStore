@@ -31,6 +31,7 @@ const TopBar = () => {
           <Link to="/favorites">Favorites</Link>
           <Link to="/cart">Cart</Link>
           {isAdmin && <Link to="/admin">Control Panel</Link>}
+          {isAdmin && <Link to="/admin/users/statistics">User Statistics</Link>}
         </nav>
         <div className="auth-bar">
           {isAuthenticated ? (

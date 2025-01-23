@@ -21,6 +21,8 @@ import BeerForm from "./components/BeerForm";
 import ManageUserPage from "./pages/ManageUserPage";
 import CreateUserForm from "./components/CreateUserForm";
 import UserDetailsPage from "./pages/UserDetailsPage";
+import UserStatisticsPage from "./pages/UserStatisticsPage";
+import AdminAndUserListPage from "./pages/AdminAndUserListPage";
 
 function App() {
   return (
@@ -144,7 +146,29 @@ function App() {
               </ProtectedRoute>
               }
             />
-          </Routes> 
+            <Route path="/admin/users/statistics"
+            element={
+              <ProtectedRoute adminOnly={true}>
+                <UserStatisticsPage />
+              </ProtectedRoute>
+              }
+            />
+            <Route path="/admin/users/adminList"
+            element={
+              <ProtectedRoute adminOnly={true}>
+                <AdminAndUserListPage type="admins"/>
+              </ProtectedRoute>
+              }
+            />
+            <Route path="/admin/users/userList"
+            element={
+              <ProtectedRoute adminOnly={true}>
+                <AdminAndUserListPage type="regular"/>
+              </ProtectedRoute>
+              }
+            />
+          </Routes>
+          
         </div>
       </Router>
     </AuthProvider>
